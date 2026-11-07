@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Little Learners</title>
+<style>
+:root{--ink:#26324b;--bg:#fff9ed;--pink:#ff8fbd;--yellow:#ffd65a;--blue:#77c8ff;--green:#8de0b0;--purple:#b7a0ff}
+*{box-sizing:border-box} body{margin:0;font-family:"Trebuchet MS",system-ui,sans-serif;background:var(--bg);color:var(--ink)}
+header{padding:20px 18px 12px;display:flex;justify-content:space-between;align-items:center;max-width:900px;margin:auto}
+.brand{font-size:1.25rem;font-weight:900}.brand span{color:#ff6b9f}
+.pill{background:white;border:2px solid #f1e8d9;border-radius:999px;padding:8px 12px;font-weight:800}
+main{max-width:900px;margin:auto;padding:10px 18px 35px}
+.hero{background:linear-gradient(120deg,#ffe47b,#ffc6df);border-radius:28px;padding:24px;display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:170px;overflow:hidden}
+.hero h1{font-size:clamp(1.7rem,5vw,2.5rem);margin:0 0 8px;line-height:1.05}.hero p{margin:0 0 15px;font-weight:700}
+.hero .mascot{font-size:5rem;filter:drop-shadow(0 6px 0 #ffffff80);animation: bounce 2s infinite;}
+@keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+.btn{border:0;border-radius:15px;padding:12px 17px;font-weight:900;font-size:1rem;background:#fff;color:var(--ink);cursor:pointer;box-shadow:0 4px 0 #00000012}
+.section-title{display:flex;justify-content:space-between;align-items:center;margin:24px 2px 12px}.section-title h2{margin:0;font-size:1.25rem}.section-title small{font-weight:800;color:#8b91a1}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
+.card{border:0;border-radius:23px;padding:17px;text-align:left;min-height:145px;cursor:pointer;color:var(--ink);box-shadow:0 5px 0 #0000000b;transition:transform .12s}
+.card:active{transform:scale(.97)}.card .emoji{font-size:2.8rem;display:block;margin-bottom:9px}.card strong{font-size:1.1rem;display:block}.card small{display:block;margin-top:4px;font-weight:700;opacity:.75}
+.c1{background:#bde8ff}.c2{background:#ffe58b}.c3{background:#c9f2d4}.c4{background:#ffd1e5}.c5{background:#d9ceff}.c6{background:#ffdfbd}
+.progress{background:white;border-radius:20px;padding:16px;margin-top:20px;border:2px solid #f1e8d9}.bar{height:12px;border-radius:99px;background:#f1eee7;overflow:hidden;margin-top:10px}.bar span{display:block;height:100%;width:22%;background:#7edba6;border-radius:999px}
+footer{text-align:center;font-size:.8rem;color:#9295a0;padding:16px}
+.modal{position:fixed;inset:0;background:#20243b88;display:none;align-items:center;justify-content:center;padding:18px;z-index:5}.modal.open{display:flex}.panel{background:#fffdf7;border-radius:28px;width:min(520px,100%);padding:22px;text-align:center;box-shadow:0 20px 70px #0003}
+.close{float:right;border:0;border-radius:50%;width:38px;height:38px;background:#f2eee5;font-size:1.2rem;cursor:pointer}
+.learn-emoji{font-size:6rem;margin:16px 0;animation: pop 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);}
+@keyframes pop { 0% { transform: scale(0.3); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+.letter{font-size:4.2rem;font-weight:1000;color:#ff6b9f;line-height:1}.word{font-size:1.5rem;font-weight:900;margin:12px}
+.choice-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:16px 0}.choice{background:#e9f6ff;border:3px solid transparent;border-radius:18px;padding:14px 18px;font-size:1.4rem;font-weight:900;cursor:pointer}.choice.correct{border-color:#6fd69b;background:#e4ffec}.choice.wrong{border-color:#ff8fbd}
+@media(min-width:650px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}.hero{padding:32px}.hero .mascot{font-size:7rem}}
+</style>
+</head>
+<body>
+<header><div class="brand">🌈 <span>Little</span> Learners</div><div class="pill">⭐ <span id="stars">0</span></div></header>
+<main>
+<section class="hero"><div><h1>Learn, play<br>and grow!</h1><p>Big fun for little learners ✨</p><button class="btn" onclick="openLesson('abc')">Let’s learn! ▶</button></div><div class="mascot" aria-hidden="true">🐻</div></section>
+<div class="section-title"><h2>What shall we learn?</h2><small>Choose a game</small></div>
+<section class="grid">
+<button class="card c1" onclick="openLesson('abc')"><span class="emoji">🔤</span><strong>ABC Adventure</strong><small>Letters & words</small></button>
+<button class="card c2" onclick="openLesson('numbers')"><span class="emoji">🔢</span><strong>Number Garden</strong><small>Count 1 to 10</small></button>
+<button class="card c3" onclick="openLesson('animals')"><span class="emoji">🐶</span><strong>Animal Friends</strong><small>Meet & hear animals</small></button>
+<button class="card c4" onclick="openLesson('colors')"><span class="emoji">🎨</span><strong>Color Splash</strong><small>Discover colors</small></button>
+<button class="card c5" onclick="openLesson('shapes')"><span class="emoji">🔺</span><strong>Shape Party</strong><small>Shapes all around</small></button>
+<button class="card c6" onclick="openLesson('songs')"><span class="emoji">🎵</span><strong>Baby Songs</strong><small>Wheels on the Bus & Farm</small></button>
+<button class="card c6" onclick="openLesson('quiz')"><span class="emoji">🧠</span><strong>Little Quiz</strong><small>Play and remember</small></button>
+</section>
+<section class="progress"><strong>🌟 Your learning journey</strong><div style="display:flex;justify-content:space-between;margin-top:7px"><span id="progressText">You’re off to a great start!</span><b id="progressNum">0 / 5</b></div><div class="bar"><span id="progressBar"></span></div></section>
+</main>
+<footer>Made with love for curious little minds 💛</footer>
+<div class="modal" id="modal" role="dialog" aria-modal="true">
+<div class="panel"><button class="close" onclick="closeLesson()" aria-label="Close">×</button><div id="lessonContent"></div></div>
+</div>
+<script>
+let stars=0, completed=new Set(), current='abc', step=0;
+const data={
+abc:[['A','Apple','🍎'],['B','Bear','🐻'],['C','Cat','🐱'],['D','Duck','🦆'],['E','Elephant','🐘']],
+numbers:[['1','One','🍓'],['2','Two','🍓🍓'],['3','Three','🍓🍓🍓'],['4','Four','🍓🍓🍓🍓'],['5','Five','🍓🍓🍓🍓🍓']],
+animals:[['Dog','Woof!','🐶'],['Cat','Meow!','🐱'],['Cow','Moo!','🐮'],['Duck','Quack!','🦆'],['Lion','Roar!','🦁']],
+colors:[['Red','Red like an apple','🟥'],['Blue','Blue like the sky','🟦'],['Yellow','Yellow like the sun','🟨'],['Green','Green like a leaf','🟩'],['Purple','Purple like a plum','🟪']],
+shapes:[['Circle','Round and round','🔵'],['Square','Four equal sides','🟦'],['Triangle','Three sides','🔺'],['Star','Twinkle, twinkle','⭐'],['Heart','A lovely heart','❤️']],
+songs:[['The Wheels on the Bus','The wheels on the bus go round and round all through the town!','🚌'],['Friendly Farm Song','The cow says moo, the chicks say peep! Down on our friendly farm...','🐮']]
+};
+function openLesson(type){current=type;step=0;document.getElementById('modal').classList.add('open');render()}
+function closeLesson(){document.getElementById('modal').classList.remove('open')}
+function render(){
+ const root=document.getElementById('lessonContent');
+ if(current==='quiz'){renderQuiz();return}
+ if(data[current]){
+  const item=data[current][step%data[current].length];
+  let title=current.toUpperCase();
+  root.innerHTML=`<h2>${title}</h2><div class="learn-emoji">${item[2]}</div><div class="letter">${item[0]}</div><div class="word">${item[1]}</div><p>Say it out loud! You're doing amazing! 🎉</p><div class="choice-row"><button class="btn" onclick="speak('${String(item[1]).replace(/'/g,"")}')">🔊 Listen</button><button class="btn" onclick="next()">Next ➜</button></div><small>Lesson ${step+1} of ${data[current].length}</small>`;
+ }
+}
+function next(){stars+=1;completed.add(current+step);document.getElementById('stars').textContent=stars;step++;if(step>=data[current].length){step=0;document.getElementById('lessonContent').innerHTML='<div class="learn-emoji">🏆</div><h2>Hooray! You did it!</h2><p>You earned a star. Keep learning and having fun!</p><button class="btn" onclick="closeLesson()">Back to home</button>';updateProgress();return}render();updateProgress()}
+function renderQuiz(){
+ const qs=[{q:'Which one says “Meow”?',opts:['🐶','🐱','🐮'],a:1},{q:'What letter starts Apple?',opts:['A','B','C'],a:0},{q:'How many strawberries? 🍓🍓',opts:['1','2','3'],a:1}];
+ const q=qs[step%qs.length];document.getElementById('lessonContent').innerHTML=`<h2>Little Quiz 🧠</h2><p style="font-size:1.2rem;font-weight:800">${q.q}</p><div class="choice-row">${q.opts.map((o,i)=>`<button class="choice" onclick="answer(this,${i===q.a})">${o}</button>`).join('')}</div><p id="feedback">Choose your answer!</p><button class="btn" id="quizNext" style="display:none" onclick="step++;renderQuiz()">Next question ➜</button>`;
+}
+function answer(el,correct){if(document.getElementById('quizNext').style.display!=='none')return;el.classList.add(correct?'correct':'wrong');document.getElementById('feedback').textContent=correct?'Wonderful! You got it! 🌟':'Good try! Have another go!';if(correct){stars++;document.getElementById('stars').textContent=stars}document.getElementById('quizNext').style.display='inline-block';}
+function updateProgress(){let n=Math.min(5,completed.size);document.getElementById('progressNum').textContent=n+' / 5';document.getElementById('progressBar').style.width=(n*20)+'%';document.getElementById('progressText').textContent=n===5?'Amazing! You learned so much!':'You’re off to a great start!'}
+function speak(text){
+ if(!('speechSynthesis' in window)) return;
+ speechSynthesis.cancel();
+ const utterance = new SpeechSynthesisUtterance(text);
+ utterance.lang = 'en-US';
+ utterance.rate = 0.88;
+ utterance.pitch = 1.55;
+ utterance.volume = 1;
+ speechSynthesis.speak(utterance);
+}
+document.getElementById('modal').addEventListener('click',e=>{if(e.target.id==='modal')closeLesson()});
+</script>
+</body></html>
